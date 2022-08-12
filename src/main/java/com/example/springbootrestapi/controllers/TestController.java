@@ -1,9 +1,17 @@
 package com.example.springbootrestapi.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
 import com.example.springbootrestapi.models.*;
 import java.util.*;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -40,10 +48,46 @@ public ArrayList<Person> getPeople() {
 
     return people;
 }
+//echo?term=<String term>
+@GetMapping(value="/echo") 
+public String getEcho(@RequestParam String term) {
+    return String.format("You said %s", term);
+}
+
+
+@PostMapping("/sum")
+public SumResponse getSum(@RequestBody SumResponse payload) {
+    payload.calculateSum();
+    return payload;
+}
+
+
+//Get ID from user, call API to return pokemon by ID
+//{id} = path parameter. QS and Path Parameter are ways to pass info to API
+
+@ResponseBody
+@GetMapping("/pokemon/{id}")
+public Pokemon fetchPokemon(@PathVariable String id) {
+    //String url = "https://pokeapi.co/api/v2/pokemon/" + id;
+    String url = String.format("https://pokeapi.co/api/v2/pokemon/%s", id);
+        //System.out.println(url);
+    //Used when a call has potential to fail. Handles errors during calls
+    RestTemplate restTemplate = new RestTemplate();
+    Pokemon pokemon = restTemplate.getForObject(url, Pokemon.class);
+
+
+    return pokemon;
+
+
+
+}
 
 
 
 
 }
+
+
+
 
 
