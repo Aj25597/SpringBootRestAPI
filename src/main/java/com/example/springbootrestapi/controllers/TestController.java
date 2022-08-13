@@ -82,6 +82,20 @@ public Pokemon fetchPokemon(@PathVariable String id) {
 
 }
 
+@ResponseBody
+@GetMapping("/pokemonItem/{id}")
+public PokemonItem getPokemonItem(@RequestParam String id) {
+    String url = String.format("https://pokeapi.co/api/v2/item/%s", id);
+
+    System.out.println(url);
+    //RestTemplate restTemplate = new RestTemplate();
+   // return restTemplate.getForObject(url, PokemonItem.class);
+
+   return null;
+
+}
+
+
 
 }
 
