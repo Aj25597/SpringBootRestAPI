@@ -81,9 +81,9 @@ public Pokemon fetchPokemon(@PathVariable String id) {
 
 
 }
-
+//Fetch a Pokemon Item from the Pokemon API
 @ResponseBody
-@GetMapping("/pokemonlocation/{id}") 
+@GetMapping("/pokemonItem/{id}") 
     public PokemonItem fetchPokemonItem(@PathVariable String id) {
         String url = String.format("https://pokeapi.co/api/v2/item/%s", id);
         
