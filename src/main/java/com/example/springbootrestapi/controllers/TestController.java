@@ -68,9 +68,9 @@ public SumResponse getSum(@RequestBody SumResponse payload) {
 @ResponseBody
 @GetMapping("/pokemon/{id}")
 public Pokemon fetchPokemon(@PathVariable String id) {
-    //String url = "https://pokeapi.co/api/v2/pokemon/" + id;
+    
     String url = String.format("https://pokeapi.co/api/v2/pokemon/%s", id);
-        //System.out.println(url);
+    
     //Used when a call has potential to fail. Handles errors during calls
     RestTemplate restTemplate = new RestTemplate();
     Pokemon pokemon = restTemplate.getForObject(url, Pokemon.class);
@@ -83,9 +83,23 @@ public Pokemon fetchPokemon(@PathVariable String id) {
 }
 
 
+@ResponseBody
+@GetMapping("/pokemonlocation/{id}") 
+    public PokemonItem fetchPokemonItem(@PathVariable String id) {
+        String url = String.format("https://pokeapi.co/api/v2/item/%s", id);
+        
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject(url, PokemonItem.class);
+
+    }
 
 
 }
+
+
+
+
+
 
 
 
